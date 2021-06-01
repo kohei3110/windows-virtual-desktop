@@ -92,7 +92,7 @@ WVD の利用には、セッションログイン用に、 Azure AD に加えて
 
 ### 詳細情報
 
-#### Azure Active Directory Domain Services の Managed Domain 内でのオブジェクトと資格情報の同期の仕組み ★（設計思想、要確認）
+#### Azure Active Directory Domain Services の Managed Domain 内でのオブジェクトと資格情報の同期の仕組み
 
 - OnP から Azure AD 間は、 Azure AD Connect を使用して、 OnP の AD DS ドメインのオブジェクトと資格情報を Azure AD に Sync 可能。
 - Azure AD から Azure AD DS に対しては、一方向 ( Azure AD -> Azure AD DS ) のみ Sync 可能。逆方向は不可能。
@@ -199,7 +199,6 @@ FSLogix コンテナを使用するためには、[サービス](https://meaning
 `*.admx` / `*.adml` については、ポリシー設定用のファイルという理解でよい（[参考](https://docs.microsoft.com/ja-jp/troubleshoot/windows-client/group-policy/create-and-manage-central-store)）。
 
 <b>FSLogix のポリシーを設定するためには、mgr@contoso.com でログインする必要がある。</b><br>
-（特に踏み台へのユーザ追加は不要。。）★理由要調査
 
 ##### タイムゾーンのリダイレクト設定
 
