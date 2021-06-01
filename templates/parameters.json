@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccounts_filesrvstracc_azureStorageSid": {
+            "value": null
+        },
+        "storageAccounts_filesrvstracc_domainGuid": {
+            "value": null
+        },
+        "storageAccounts_filesrvstracc_domainSid": {
+            "value": null
+        },
+        "storageAccounts_filesrvstracc_forestName": {
+            "value": null
+        },
+        "storageAccounts_filesrvstracc_netBiosDomainName": {
+            "value": null
+        },
+        "domainServices_contoso_com_name": {
+            "value": null
+        },
+        "virtualMachines_mgr_vm_name": {
+            "value": null
+        },
+        "virtualMachines_shost_0_name": {
+            "value": null
+        },
+        "virtualMachines_shost_1_name": {
+            "value": null
+        },
+        "virtualNetworks_wvd_vnet_name": {
+            "value": null
+        },
+        "images_wvd_w10_depo_image_name": {
+            "value": null
+        },
+        "networkInterfaces_mgr_vm631_name": {
+            "value": null
+        },
+        "hostpools_hpool_name": {
+            "value": null
+        },
+        "bastionHosts_wvd_vnet_bastion_name": {
+            "value": null
+        },
+        "networkInterfaces_shost_0_nic_name": {
+            "value": null
+        },
+        "networkInterfaces_shost_1_nic_name": {
+            "value": null
+        },
+        "publicIPAddresses_wvd_vnet_ip_name": {
+            "value": null
+        },
+        "storageAccounts_filesrvstracc_name": {
+            "value": null
+        },
+        "networkSecurityGroups_aadds_nsg_name": {
+            "value": null
+        },
+        "networkInterfaces_windowsmgrvm976_name": {
+            "value": null
+        },
+        "networkInterfaces_wvd_w10_depo734_name": {
+            "value": null
+        },
+        "publicIPAddresses_wvd_w10_depo_ip_name": {
+            "value": null
+        },
+        "workspaces_WVD_Workspace_name": {
+            "value": null
+        },
+        "schedules_shutdown_computevm_mgr_vm_name": {
+            "value": null
+        },
+        "applicationgroups_hpool_DAG_name": {
+            "value": null
+        },
+        "loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name": {
+            "value": null
+        },
+        "disks_windowsMGRvm_OsDisk_1_ff43aec3522c44b7899843406cb82772_name": {
+            "value": null
+        },
+        "disks_wvd_w10_depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e_name": {
+            "value": null
+        },
+        "networkInterfaces_aadds_2e80d58ceadf43b59f691a5f33aa1757_nic_name": {
+            "value": null
+        },
+        "networkInterfaces_aadds_4677b46bf8c545999b619a7cfabee643_nic_name": {
+            "value": null
+        },
+        "publicIPAddresses_aadds_a17a0b4016f44f9398301064c7dbc33d_pip_name": {
+            "value": null
+        },
+        "virtualMachines_wvd_w10_depo_externalid": {
+            "value": null
+        }
+    }
+}

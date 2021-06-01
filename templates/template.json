@@ -1,0 +1,1357 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccounts_filesrvstracc_azureStorageSid": {
+            "type": "SecureString"
+        },
+        "storageAccounts_filesrvstracc_domainGuid": {
+            "type": "SecureString"
+        },
+        "storageAccounts_filesrvstracc_domainSid": {
+            "type": "SecureString"
+        },
+        "storageAccounts_filesrvstracc_forestName": {
+            "type": "SecureString"
+        },
+        "storageAccounts_filesrvstracc_netBiosDomainName": {
+            "type": "SecureString"
+        },
+        "domainServices_contoso_com_name": {
+            "defaultValue": "contoso.com",
+            "type": "String"
+        },
+        "virtualMachines_mgr_vm_name": {
+            "defaultValue": "mgr-vm",
+            "type": "String"
+        },
+        "virtualMachines_shost_0_name": {
+            "defaultValue": "shost-0",
+            "type": "String"
+        },
+        "virtualMachines_shost_1_name": {
+            "defaultValue": "shost-1",
+            "type": "String"
+        },
+        "virtualNetworks_wvd_vnet_name": {
+            "defaultValue": "wvd-vnet",
+            "type": "String"
+        },
+        "images_wvd_w10_depo_image_name": {
+            "defaultValue": "wvd-w10-depo-image",
+            "type": "String"
+        },
+        "networkInterfaces_mgr_vm631_name": {
+            "defaultValue": "mgr-vm631",
+            "type": "String"
+        },
+        "hostpools_hpool_name": {
+            "defaultValue": "hpool",
+            "type": "String"
+        },
+        "bastionHosts_wvd_vnet_bastion_name": {
+            "defaultValue": "wvd-vnet-bastion",
+            "type": "String"
+        },
+        "networkInterfaces_shost_0_nic_name": {
+            "defaultValue": "shost-0-nic",
+            "type": "String"
+        },
+        "networkInterfaces_shost_1_nic_name": {
+            "defaultValue": "shost-1-nic",
+            "type": "String"
+        },
+        "publicIPAddresses_wvd_vnet_ip_name": {
+            "defaultValue": "wvd-vnet-ip",
+            "type": "String"
+        },
+        "storageAccounts_filesrvstracc_name": {
+            "defaultValue": "filesrvstracc",
+            "type": "String"
+        },
+        "networkSecurityGroups_aadds_nsg_name": {
+            "defaultValue": "aadds-nsg",
+            "type": "String"
+        },
+        "networkInterfaces_windowsmgrvm976_name": {
+            "defaultValue": "windowsmgrvm976",
+            "type": "String"
+        },
+        "networkInterfaces_wvd_w10_depo734_name": {
+            "defaultValue": "wvd-w10-depo734",
+            "type": "String"
+        },
+        "publicIPAddresses_wvd_w10_depo_ip_name": {
+            "defaultValue": "wvd-w10-depo-ip",
+            "type": "String"
+        },
+        "workspaces_WVD_Workspace_name": {
+            "defaultValue": "WVD_Workspace",
+            "type": "String"
+        },
+        "schedules_shutdown_computevm_mgr_vm_name": {
+            "defaultValue": "shutdown-computevm-mgr-vm",
+            "type": "String"
+        },
+        "applicationgroups_hpool_DAG_name": {
+            "defaultValue": "hpool-DAG",
+            "type": "String"
+        },
+        "loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name": {
+            "defaultValue": "aadds-a17a0b4016f44f9398301064c7dbc33d-lb",
+            "type": "String"
+        },
+        "disks_windowsMGRvm_OsDisk_1_ff43aec3522c44b7899843406cb82772_name": {
+            "defaultValue": "windowsMGRvm_OsDisk_1_ff43aec3522c44b7899843406cb82772",
+            "type": "String"
+        },
+        "disks_wvd_w10_depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e_name": {
+            "defaultValue": "wvd-w10-depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e",
+            "type": "String"
+        },
+        "networkInterfaces_aadds_2e80d58ceadf43b59f691a5f33aa1757_nic_name": {
+            "defaultValue": "aadds-2e80d58ceadf43b59f691a5f33aa1757-nic",
+            "type": "String"
+        },
+        "networkInterfaces_aadds_4677b46bf8c545999b619a7cfabee643_nic_name": {
+            "defaultValue": "aadds-4677b46bf8c545999b619a7cfabee643-nic",
+            "type": "String"
+        },
+        "publicIPAddresses_aadds_a17a0b4016f44f9398301064c7dbc33d_pip_name": {
+            "defaultValue": "aadds-a17a0b4016f44f9398301064c7dbc33d-pip",
+            "type": "String"
+        },
+        "virtualMachines_wvd_w10_depo_externalid": {
+            "defaultValue": "/subscriptions/1b8e30ae-83d6-48ec-8d25-d083eec0e754/resourceGroups/wvd-rg/providers/Microsoft.Compute/virtualMachines/wvd-w10-depo",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2020-09-30",
+            "name": "[parameters('disks_windowsMGRvm_OsDisk_1_ff43aec3522c44b7899843406cb82772_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "StandardSSD_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "osType": "Windows",
+                "hyperVGeneration": "V1",
+                "creationData": {
+                    "createOption": "FromImage",
+                    "imageReference": {
+                        "id": "/Subscriptions/1b8e30ae-83d6-48ec-8d25-d083eec0e754/Providers/Microsoft.Compute/Locations/japaneast/Publishers/MicrosoftWindowsServer/ArtifactTypes/VMImage/Offers/WindowsServer/Skus/2016-Datacenter/Versions/14393.4402.2105052108"
+                    }
+                },
+                "diskSizeGB": 127,
+                "diskIOPSReadWrite": 500,
+                "diskMBpsReadWrite": 60,
+                "encryption": {
+                    "type": "EncryptionAtRestWithPlatformKey"
+                },
+                "diskState": "Unattached",
+                "networkAccessPolicy": "AllowAll"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2020-09-30",
+            "name": "[parameters('disks_wvd_w10_depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "StandardSSD_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "osType": "Windows",
+                "hyperVGeneration": "V2",
+                "creationData": {
+                    "createOption": "FromImage",
+                    "imageReference": {
+                        "id": "/Subscriptions/1b8e30ae-83d6-48ec-8d25-d083eec0e754/Providers/Microsoft.Compute/Locations/japaneast/Publishers/microsoftwindowsdesktop/ArtifactTypes/VMImage/Offers/office-365/Skus/20h2-evd-o365pp-g2/Versions/19042.985.2105111111"
+                    }
+                },
+                "diskSizeGB": 127,
+                "diskIOPSReadWrite": 500,
+                "diskMBpsReadWrite": 60,
+                "encryption": {
+                    "type": "EncryptionAtRestWithPlatformKey"
+                },
+                "diskState": "Unattached",
+                "networkAccessPolicy": "AllowAll"
+            }
+        },
+        {
+            "type": "Microsoft.DesktopVirtualization/hostpools",
+            "apiVersion": "2021-02-01-preview",
+            "name": "[parameters('hostpools_hpool_name')]",
+            "location": "westus2",
+            "properties": {
+                "description": "Created through the WVD extension",
+                "hostPoolType": "Pooled",
+                "maxSessionLimit": 2,
+                "loadBalancerType": "BreadthFirst",
+                "validationEnvironment": false,
+                "vmTemplate": "{\"domain\":\"contoso.com\",\"galleryImageOffer\":null,\"galleryImagePublisher\":null,\"galleryImageSKU\":null,\"imageType\":\"CustomImage\",\"imageUri\":null,\"customImageId\":\"/subscriptions/1b8e30ae-83d6-48ec-8d25-d083eec0e754/resourceGroups/wvd-rg/providers/Microsoft.Compute/images/wvd-w10-depo-image\",\"namePrefix\":\"shost\",\"osDiskType\":\"Standard_LRS\",\"useManagedDisks\":true,\"vmSize\":{\"id\":\"Standard_D2as_v4\",\"cores\":2,\"ram\":8},\"galleryItemId\":null}",
+                "preferredAppGroupType": "Desktop",
+                "startVMOnConnect": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkSecurityGroups_aadds_nsg_name')]",
+            "location": "japaneast",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "AllowPSRemoting",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "5986",
+                            "sourceAddressPrefix": "AzureActiveDirectoryDomainServices",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 301,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "AllowRD",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "CorpNetSaw",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 201,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('publicIPAddresses_aadds_a17a0b4016f44f9398301064c7dbc33d_pip_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "zones": [
+                "1",
+                "2",
+                "3"
+            ],
+            "properties": {
+                "ipAddress": "20.194.136.22",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "cust-c-o-n-t-o-s-o-0-c-o-m-a17a0b40-16f4-4f93-9830-1064c7dbc33d",
+                    "fqdn": "cust-c-o-n-t-o-s-o-0-c-o-m-a17a0b40-16f4-4f93-9830-1064c7dbc33d.japaneast.cloudapp.azure.com"
+                },
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('publicIPAddresses_wvd_vnet_ip_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "zones": [
+                "1",
+                "2",
+                "3"
+            ],
+            "properties": {
+                "ipAddress": "20.194.207.244",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('publicIPAddresses_wvd_w10_depo_ip_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": []
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "name": "[parameters('storageAccounts_filesrvstracc_name')]",
+            "location": "westus2",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "StorageV2",
+            "properties": {
+                "azureFilesIdentityBasedAuthentication": {
+                    "directoryServiceOptions": "AADDS",
+                    "activeDirectoryProperties": {
+                        "domainName": "contoso.com",
+                        "azureStorageSid": "[parameters('storageAccounts_filesrvstracc_azureStorageSid')]",
+                        "domainGuid": "[parameters('storageAccounts_filesrvstracc_domainGuid')]",
+                        "domainSid": "[parameters('storageAccounts_filesrvstracc_domainSid')]",
+                        "forestName": "[parameters('storageAccounts_filesrvstracc_forestName')]",
+                        "netBiosDomainName": "[parameters('storageAccounts_filesrvstracc_netBiosDomainName')]"
+                    }
+                },
+                "minimumTlsVersion": "TLS1_2",
+                "allowBlobPublicAccess": true,
+                "allowSharedKeyAccess": true,
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                },
+                "accessTier": "Hot"
+            }
+        },
+        {
+            "type": "Microsoft.AAD/domainServices",
+            "apiVersion": "2021-03-01",
+            "name": "[parameters('domainServices_contoso_com_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "domainName": "[parameters('domainServices_contoso_com_name')]",
+                "replicaSets": [
+                    {
+                        "location": "Japan East",
+                        "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                    }
+                ],
+                "ldapsSettings": {
+                    "ldaps": "Disabled",
+                    "externalAccess": "Disabled"
+                },
+                "domainSecuritySettings": {
+                    "ntlmV1": "Enabled",
+                    "tlsV1": "Enabled",
+                    "syncNtlmPasswords": "Enabled",
+                    "syncKerberosPasswords": "Enabled",
+                    "syncOnPremPasswords": "Enabled",
+                    "kerberosRc4Encryption": "Enabled",
+                    "kerberosArmoring": "Disabled"
+                },
+                "filteredSync": "Disabled",
+                "resourceForestSettings": {
+                    "settings": []
+                },
+                "domainConfigurationType": "FullySynced",
+                "notificationSettings": {
+                    "notifyGlobalAdmins": "Enabled",
+                    "notifyDcAdmins": "Enabled",
+                    "additionalRecipients": []
+                },
+                "sku": "Standard"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/images",
+            "apiVersion": "2020-12-01",
+            "name": "[parameters('images_wvd_w10_depo_image_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/disks', parameters('disks_wvd_w10_depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e_name'))]"
+            ],
+            "properties": {
+                "sourceVirtualMachine": {
+                    "id": "[parameters('virtualMachines_wvd_w10_depo_externalid')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Windows",
+                        "osState": "Generalized",
+                        "diskSizeGB": 127,
+                        "managedDisk": {
+                            "id": "[resourceId('Microsoft.Compute/disks', parameters('disks_wvd_w10_depo_OsDisk_1_11d9886de8a94290b84af8b1bce4781e_name'))]"
+                        },
+                        "caching": "ReadWrite",
+                        "storageAccountType": "StandardSSD_LRS"
+                    },
+                    "dataDisks": [],
+                    "zoneResilient": false
+                },
+                "hyperVGeneration": "V2"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-12-01",
+            "name": "[parameters('virtualMachines_mgr_vm_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_mgr_vm631_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2as_v4"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_mgr_vm_name'), '_OsDisk_1_1e8e4cbcaf17425c9754aaf9c72d5508')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "StandardSSD_LRS",
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_mgr_vm_name'), '_OsDisk_1_1e8e4cbcaf17425c9754aaf9c72d5508'))]"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_mgr_vm_name')]",
+                    "adminUsername": "koheisaito",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_mgr_vm631_name'))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('virtualMachines_shost_0_name'), '/Microsoft.PowerShell.DSC')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_shost_0_name'))]"
+            ],
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.73",
+                "settings": {
+                    "modulesUrl": "https://wvdportalstorageblob.blob.core.windows.net/galleryartifacts/Configuration_3-10-2021.zip",
+                    "configurationFunction": "Configuration.ps1\\AddSessionHost",
+                    "properties": {
+                        "hostPoolName": "hpool",
+                        "registrationInfoToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg2Mjg0QjJDMkE5RTNFRTQxMzdFMTU3RTVFNzhCMzc4M0Y2QzA5NjEiLCJ0eXAiOiJKV1QifQ.eyJSZWdpc3RyYXRpb25JZCI6IjQzMTYzMzA1LTc2ZTctNGUwOS1iNWM1LTg2YjFjNDVmOWVmMCIsIkJyb2tlclVyaSI6Imh0dHBzOi8vcmRicm9rZXItZy11cy1yMC53dmQubWljcm9zb2Z0LmNvbS8iLCJEaWFnbm9zdGljc1VyaSI6Imh0dHBzOi8vcmRkaWFnbm9zdGljcy1nLXVzLXIwLnd2ZC5taWNyb3NvZnQuY29tLyIsIkVuZHBvaW50UG9vbElkIjoiNWFmNjdhMDktYzBkYy00MGRkLTlhNDQtYWI0YTRiYzVhZDgzIiwiR2xvYmFsQnJva2VyVXJpIjoiaHR0cHM6Ly9yZGJyb2tlci53dmQubWljcm9zb2Z0LmNvbS8iLCJHZW9ncmFwaHkiOiJVUyIsIm5iZiI6MTYyMjUzMTQxNywiZXhwIjoxNjIyNjE3Nzk3LCJpc3MiOiJSREluZnJhVG9rZW5NYW5hZ2VyIiwiYXVkIjoiUkRtaSJ9.Uet6BrffOikALl-NbPv0t1JoXjoGN_GV0MsGc_W58wlZkTG2cTtK5qoRKu9EqeCmEFLs_aSLM2Zs2_NLSxldoVaqdrA6HnScdpHcX5qlhvTrVHKfwc6Q_IO3Xwd2LA8Gnp0LqJoe8invm2fWdcGCMHZYpWNX7qANMjalOR6zgfMnIbK4bSD2T_9i_qiyCp_F5p4QSrzPi03Mi8oSv_CsUMlp2l4stinAwrmtFai_ctTDRJV8f1-Tw1LN4y4DJYpy172rxyvOQmVKzXl2xTmRNnqdQbRSSwzwO_wdmgjYGJhjhoXI1J_iH6i0jPClneoVJnoWeUoTNzVJExXXMn5IbQ",
+                        "aadJoin": false
+                    }
+                },
+                "protectedSettings": {}
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('virtualMachines_shost_1_name'), '/Microsoft.PowerShell.DSC')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_shost_1_name'))]"
+            ],
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.73",
+                "settings": {
+                    "modulesUrl": "https://wvdportalstorageblob.blob.core.windows.net/galleryartifacts/Configuration_3-10-2021.zip",
+                    "configurationFunction": "Configuration.ps1\\AddSessionHost",
+                    "properties": {
+                        "hostPoolName": "hpool",
+                        "registrationInfoToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg2Mjg0QjJDMkE5RTNFRTQxMzdFMTU3RTVFNzhCMzc4M0Y2QzA5NjEiLCJ0eXAiOiJKV1QifQ.eyJSZWdpc3RyYXRpb25JZCI6IjQzMTYzMzA1LTc2ZTctNGUwOS1iNWM1LTg2YjFjNDVmOWVmMCIsIkJyb2tlclVyaSI6Imh0dHBzOi8vcmRicm9rZXItZy11cy1yMC53dmQubWljcm9zb2Z0LmNvbS8iLCJEaWFnbm9zdGljc1VyaSI6Imh0dHBzOi8vcmRkaWFnbm9zdGljcy1nLXVzLXIwLnd2ZC5taWNyb3NvZnQuY29tLyIsIkVuZHBvaW50UG9vbElkIjoiNWFmNjdhMDktYzBkYy00MGRkLTlhNDQtYWI0YTRiYzVhZDgzIiwiR2xvYmFsQnJva2VyVXJpIjoiaHR0cHM6Ly9yZGJyb2tlci53dmQubWljcm9zb2Z0LmNvbS8iLCJHZW9ncmFwaHkiOiJVUyIsIm5iZiI6MTYyMjUzMTQxNywiZXhwIjoxNjIyNjE3Nzk3LCJpc3MiOiJSREluZnJhVG9rZW5NYW5hZ2VyIiwiYXVkIjoiUkRtaSJ9.Uet6BrffOikALl-NbPv0t1JoXjoGN_GV0MsGc_W58wlZkTG2cTtK5qoRKu9EqeCmEFLs_aSLM2Zs2_NLSxldoVaqdrA6HnScdpHcX5qlhvTrVHKfwc6Q_IO3Xwd2LA8Gnp0LqJoe8invm2fWdcGCMHZYpWNX7qANMjalOR6zgfMnIbK4bSD2T_9i_qiyCp_F5p4QSrzPi03Mi8oSv_CsUMlp2l4stinAwrmtFai_ctTDRJV8f1-Tw1LN4y4DJYpy172rxyvOQmVKzXl2xTmRNnqdQbRSSwzwO_wdmgjYGJhjhoXI1J_iH6i0jPClneoVJnoWeUoTNzVJExXXMn5IbQ",
+                        "aadJoin": false
+                    }
+                },
+                "protectedSettings": {}
+            }
+        },
+        {
+            "type": "Microsoft.DesktopVirtualization/applicationgroups",
+            "apiVersion": "2021-02-01-preview",
+            "name": "[parameters('applicationgroups_hpool_DAG_name')]",
+            "location": "westus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.DesktopVirtualization/hostpools', parameters('hostpools_hpool_name'))]"
+            ],
+            "kind": "Desktop",
+            "properties": {
+                "hostPoolArmPath": "[resourceId('Microsoft.DesktopVirtualization/hostpools', parameters('hostpools_hpool_name'))]",
+                "description": "Desktop Application Group created through the Hostpool Wizard",
+                "friendlyName": "Default Desktop",
+                "applicationGroupType": "Desktop"
+            }
+        },
+        {
+            "type": "Microsoft.DesktopVirtualization/workspaces",
+            "apiVersion": "2021-02-01-preview",
+            "name": "[parameters('workspaces_WVD_Workspace_name')]",
+            "location": "westus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.DesktopVirtualization/applicationgroups', parameters('applicationgroups_hpool_DAG_name'))]"
+            ],
+            "properties": {
+                "applicationGroupReferences": [
+                    "[resourceId('Microsoft.DesktopVirtualization/applicationgroups', parameters('applicationgroups_hpool_DAG_name'))]"
+                ]
+            }
+        },
+        {
+            "type": "microsoft.devtestlab/schedules",
+            "apiVersion": "2018-09-15",
+            "name": "[parameters('schedules_shutdown_computevm_mgr_vm_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_mgr_vm_name'))]"
+            ],
+            "properties": {
+                "status": "Enabled",
+                "taskType": "ComputeVmShutdownTask",
+                "dailyRecurrence": {
+                    "time": "1900"
+                },
+                "timeZoneId": "UTC",
+                "notificationSettings": {
+                    "status": "Enabled",
+                    "timeInMinutes": 30,
+                    "emailRecipient": "kk.31108424@gmail.com",
+                    "notificationLocale": "ja"
+                },
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_mgr_vm_name'))]"
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), '/ROO0A0Y2MAQFNHGBe')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'))]"
+            ],
+            "properties": {
+                "loadBalancerBackendAddresses": [
+                    {
+                        "name": "wvd-rg_aadds-4677b46bf8c545999b619a7cfabee643-nicCWE34NRI2RTVS9SIpcfg",
+                        "properties": {}
+                    },
+                    {
+                        "name": "wvd-rg_aadds-2e80d58ceadf43b59f691a5f33aa1757-nicYC7NUA9F7PEGG5GIpcfg",
+                        "properties": {}
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers/inboundNatRules",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), '/CWE34NRI2RTVS9SPsh')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'))]"
+            ],
+            "properties": {
+                "frontendIPConfiguration": {
+                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')), '/frontendIPConfigurations/ROO0A0Y2MAQFNHGFe')]"
+                },
+                "frontendPort": 5986,
+                "backendPort": 5986,
+                "enableFloatingIP": false,
+                "idleTimeoutInMinutes": 15,
+                "protocol": "Tcp",
+                "enableTcpReset": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers/inboundNatRules",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), '/YC7NUA9F7PEGG5GPsh')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'))]"
+            ],
+            "properties": {
+                "frontendIPConfiguration": {
+                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')), '/frontendIPConfigurations/ROO0A0Y2MAQFNHGFe')]"
+                },
+                "frontendPort": 5987,
+                "backendPort": 5986,
+                "enableFloatingIP": false,
+                "idleTimeoutInMinutes": 15,
+                "protocol": "Tcp",
+                "enableTcpReset": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_mgr_vm631_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.7",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_shost_0_nic_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.10",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_shost_1_nic_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.9",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_windowsmgrvm976_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.6",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_aadds_nsg_name'), '/AllowPSRemoting')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "5986",
+                "sourceAddressPrefix": "AzureActiveDirectoryDomainServices",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 301,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_aadds_nsg_name'), '/AllowRD')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "CorpNetSaw",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 201,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('virtualNetworks_wvd_vnet_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": [
+                        "10.0.1.5",
+                        "10.0.1.4"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "wvd-subnet-pub",
+                        "properties": {
+                            "addressPrefix": "10.0.1.0/24",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+                            },
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    },
+                    {
+                        "name": "AzureBastionSubnet",
+                        "properties": {
+                            "addressPrefix": "10.0.2.0/27",
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_wvd_vnet_name'), '/AzureBastionSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_wvd_vnet_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.0.2.0/27",
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2021-04-01",
+            "name": "[concat(parameters('storageAccounts_filesrvstracc_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_filesrvstracc_name'))]"
+            ],
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "enabled": true,
+                    "days": 7
+                },
+                "isVersioningEnabled": false,
+                "changeFeed": {
+                    "enabled": false
+                },
+                "restorePolicy": {
+                    "enabled": false
+                },
+                "containerDeleteRetentionPolicy": {
+                    "enabled": true,
+                    "days": 7
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices",
+            "apiVersion": "2021-04-01",
+            "name": "[concat(parameters('storageAccounts_filesrvstracc_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_filesrvstracc_name'))]"
+            ],
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "protocolSettings": {
+                    "smb": {}
+                },
+                "cors": {
+                    "corsRules": []
+                },
+                "shareDeleteRetentionPolicy": {
+                    "enabled": true,
+                    "days": 7
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/queueServices",
+            "apiVersion": "2021-04-01",
+            "name": "[concat(parameters('storageAccounts_filesrvstracc_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_filesrvstracc_name'))]"
+            ],
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/tableServices",
+            "apiVersion": "2021-04-01",
+            "name": "[concat(parameters('storageAccounts_filesrvstracc_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_filesrvstracc_name'))]"
+            ],
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-12-01",
+            "name": "[parameters('virtualMachines_shost_0_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/images', parameters('images_wvd_w10_depo_image_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_shost_0_nic_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2as_v4"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "[resourceId('Microsoft.Compute/images', parameters('images_wvd_w10_depo_image_name'))]"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_shost_0_name'), '_disk1_08da80aec81a4489bb3c75ce0006a521')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS",
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_shost_0_name'), '_disk1_08da80aec81a4489bb3c75ce0006a521'))]"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_shost_0_name')]",
+                    "adminUsername": "koheisaito",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS"
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_shost_0_nic_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-12-01",
+            "name": "[parameters('virtualMachines_shost_1_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/images', parameters('images_wvd_w10_depo_image_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_shost_1_nic_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2as_v4"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "id": "[resourceId('Microsoft.Compute/images', parameters('images_wvd_w10_depo_image_name'))]"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_shost_1_name'), '_disk1_04b774eacaa341958ac808c0d738f0a8')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS",
+                            "id": "[resourceId('Microsoft.Compute/disks', concat(parameters('virtualMachines_shost_1_name'), '_disk1_04b774eacaa341958ac808c0d738f0a8'))]"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_shost_1_name')]",
+                    "adminUsername": "koheisaito",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS"
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_shost_1_nic_name'))]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Network/bastionHosts",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('bastionHosts_wvd_vnet_bastion_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_wvd_vnet_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'AzureBastionSubnet')]"
+            ],
+            "sku": {
+                "name": "Basic"
+            },
+            "properties": {
+                "dnsName": "bst-48b26a4b-1526-4ff3-8f81-e98cb0850637.bastion.azure.com",
+                "ipConfigurations": [
+                    {
+                        "name": "IpConf",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_wvd_vnet_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'AzureBastionSubnet')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_aadds_a17a0b4016f44f9398301064c7dbc33d_pip_name'))]",
+                "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]"
+            ],
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "ROO0A0Y2MAQFNHGFe",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_aadds_a17a0b4016f44f9398301064c7dbc33d_pip_name'))]"
+                            },
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "ROO0A0Y2MAQFNHGBe",
+                        "properties": {
+                            "loadBalancerBackendAddresses": [
+                                {
+                                    "name": "wvd-rg_aadds-4677b46bf8c545999b619a7cfabee643-nicCWE34NRI2RTVS9SIpcfg",
+                                    "properties": {}
+                                },
+                                {
+                                    "name": "wvd-rg_aadds-2e80d58ceadf43b59f691a5f33aa1757-nicYC7NUA9F7PEGG5GIpcfg",
+                                    "properties": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "loadBalancingRules": [],
+                "probes": [],
+                "inboundNatRules": [
+                    {
+                        "name": "CWE34NRI2RTVS9SPsh",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')), '/frontendIPConfigurations/ROO0A0Y2MAQFNHGFe')]"
+                            },
+                            "frontendPort": 5986,
+                            "backendPort": 5986,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 15,
+                            "protocol": "Tcp",
+                            "enableTcpReset": false
+                        }
+                    },
+                    {
+                        "name": "YC7NUA9F7PEGG5GPsh",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')), '/frontendIPConfigurations/ROO0A0Y2MAQFNHGFe')]"
+                            },
+                            "frontendPort": 5987,
+                            "backendPort": 5986,
+                            "enableFloatingIP": false,
+                            "idleTimeoutInMinutes": 15,
+                            "protocol": "Tcp",
+                            "enableTcpReset": false
+                        }
+                    }
+                ],
+                "outboundRules": [
+                    {
+                        "name": "ROO0A0Y2MAQFNHGGe",
+                        "properties": {
+                            "allocatedOutboundPorts": 1024,
+                            "protocol": "Tcp",
+                            "enableTcpReset": false,
+                            "idleTimeoutInMinutes": 4,
+                            "backendAddressPool": {
+                                "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]"
+                            },
+                            "frontendIPConfigurations": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/loadBalancers', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name')), '/frontendIPConfigurations/ROO0A0Y2MAQFNHGFe')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "inboundNatPools": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_wvd_w10_depo734_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_wvd_w10_depo_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.8",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_wvd_w10_depo_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_wvd_vnet_name'), '/wvd-subnet-pub')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_wvd_vnet_name'))]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.0.1.0/24",
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_aadds_nsg_name'))]"
+                },
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+            "apiVersion": "2021-04-01",
+            "name": "[concat(parameters('storageAccounts_filesrvstracc_name'), '/default/profile')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccounts_filesrvstracc_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_filesrvstracc_name'))]"
+            ],
+            "properties": {
+                "accessTier": "TransactionOptimized",
+                "shareQuota": 500,
+                "enabledProtocols": "SMB"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_aadds_2e80d58ceadf43b59f691a5f33aa1757_nic_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]",
+                "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]",
+                "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'YC7NUA9F7PEGG5GPsh')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "YC7NUA9F7PEGG5GIpcfg",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4",
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]"
+                                }
+                            ],
+                            "loadBalancerInboundNatRules": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'YC7NUA9F7PEGG5GPsh')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.1.4",
+                        "10.0.1.5"
+                    ]
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('networkInterfaces_aadds_4677b46bf8c545999b619a7cfabee643_nic_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]",
+                "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]",
+                "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'CWE34NRI2RTVS9SPsh')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "CWE34NRI2RTVS9SIpcfg",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_wvd_vnet_name'), 'wvd-subnet-pub')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4",
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'ROO0A0Y2MAQFNHGBe')]"
+                                }
+                            ],
+                            "loadBalancerInboundNatRules": [
+                                {
+                                    "id": "[resourceId('Microsoft.Network/loadBalancers/inboundNatRules', parameters('loadBalancers_aadds_a17a0b4016f44f9398301064c7dbc33d_lb_name'), 'CWE34NRI2RTVS9SPsh')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.0.1.4",
+                        "10.0.1.5"
+                    ]
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false
+            }
+        }
+    ]
+}
