@@ -163,7 +163,7 @@ IP addresses:
 ・・・
 ```
 
-あらかじめ Azure Portal にて DNS サーバの設定を更新すれば、下記のエラーに躓くことはない（[参考](https://qiita.com/takeokams/items/ef26b60306d1cb5eee27#azure-ad-domain-services%E3%81%AE%E4%BD%9C%E6%88%90)）。ただし、この設定を怠った場合、 VM 上で DNS サーバの設定変更を行うと、ネットワークの問題が生じ、 Bastion 経由で VM に接続することができなくなってしまった。原因は不明だが、 Managed Service であるため、設定は可能な限り Azure Portal から行うのがよいだろう。
+あらかじめ Azure Portal にて DNS サーバの設定を更新すれば、下記のエラーに躓くことはない（[参考](https://qiita.com/takeokams/items/ef26b60306d1cb5eee27#azure-ad-domain-services%E3%81%AE%E4%BD%9C%E6%88%90)）。ただし、この設定を怠った場合、 VM 上で DNS サーバの設定変更を行うと、ネットワークの問題が生じ、 Bastion 経由で VM に接続することができなくなってしまった。Managed Service であるため、設定は可能な限り Azure Portal から行うのがよいだろう。
 
 また、作成したユーザで初回ログイン時は、あらかじめパスワードを変更する必要がある。パスワードを変更せずにログインしようとすると、ドメイン参加時に下図のようなエラーメッセージが出力される。
 
